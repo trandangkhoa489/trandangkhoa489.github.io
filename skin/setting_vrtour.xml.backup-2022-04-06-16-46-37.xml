@@ -1,0 +1,80 @@
+<krpano>
+	<!-- Action -->
+	<action name="toggle_element">
+		toggle(layer[fullscreen_kr].visible);
+		toggle(layer[gyroscope_kr].visible);
+		toggle(layer[virtual_reality_kr].visible);
+		toggle(layer[sound_kr].visible);
+		toggle(layer[thumbs_tourvr2].visible);
+
+	</action>
+	<!-- END -->
+
+	<style name="button_toolbar" 
+	   onhover="tween(layer[hint].x,get(x),.1);tween(layer[hint].alpha,1,.2);set(layer[hint].html,get(hint));tween(y,-5,.1);tween(scale,1.1,0.1);"
+
+	   onout="tween(layer[hint].alpha,0,.1);set(layer[hint].html,);tween(y,0,0.1);tween(scale,1.0,0.3);"
+	   
+	  />
+
+
+	<!-- SETTINGs -->
+	<layer name="setting_kr" type="container" enabled="true"
+		bgcolor="0x000000" bgalpha="0.6" alpha="1"
+		width="32" height="32" zorder="350" bgcapture="true"
+		align="rightbottom" keep="true" x="10" y="12" bgroundedge="30"
+		onover="tween(bgalpha,1);" onout="tween(bgalpha,0.6);">
+
+		<layer name="icon_setting" style="button_toolbar" type="image" url="gear_new.png" align="center" scale="0.9" onclick="toggle_element();" />
+
+	</layer>
+
+	<layer name="fullscreen_kr" type="container" enabled="true"
+		bgcolor="0x000000" bgalpha="0.6" alpha="1"
+		width="32" height="32" zorder="350" bgcapture="true"
+		align="rightbottom" keep="true" x="43" y="12" bgroundedge="30" 
+		visible="false" onover="tween(bgalpha,1);" onout="tween(bgalpha,0.6);">
+
+		<layer name="icon_fullscreen" type="image" url="fullscreen.png" align="center" scale="0.65" hint="Mở toàn màn hình" onclick="if(state==on,set(state,off);js(closeFullscreen());set(hint,Mở toàn màn hình);,set(state,on);js(openFullscreen());set(hint,Thoát toàn màn hình));" state="off"/>
+
+	</layer>
+
+	<!-- <layer name="gyroscope_kr" type="container" enabled="true"
+		bgcolor="0x000000" bgalpha="0.6" alpha="1"
+		width="32" height="32" zorder="350" bgcapture="true"
+		align="rightbottom" keep="true" x="77" y="12" bgroundedge="30" 
+		visible="false" onover="tween(bgalpha,1);" onout="tween(bgalpha,0.6);">
+		<layer name="icon_gyroscope" type="image" url="%SWFPATH%/skin/icon_gyro.png" align="center" scale="0.65" crop="0|0|24|24" onclick="switch(crop, 0|0|24|24, 0|24|24|24);"/>
+	</layer> -->
+	
+	<layer name="virtual_reality_kr" type="container" enabled="true"
+		bgcolor="0x000000" bgalpha="0.6" alpha="1"
+		width="32" height="32" zorder="350" bgcapture="true"
+		align="rightbottom" keep="true" x="10" y="47" bgroundedge="30"
+		visible="false" onover="tween(bgalpha,1);" onout="tween(bgalpha,0.6);">
+		<layer name="icon_virtualreality" type="image" url="virtual-reality.png" align="center" scale="0.90" onclick="webvr.enterVR();"/>
+	</layer>
+
+	<layer name="sound_kr" type="container" enabled="true"
+		bgcolor="0x000000" bgalpha="0.6" alpha="1"
+		width="32" height="32" zorder="350" bgcapture="true"
+		align="rightbottom" keep="true" x="10" y="82" bgroundedge="30"
+		visible="false" onover="tween(bgalpha,1);" onout="tween(bgalpha,0.6);">
+		<layer name="icon_sound" type="image" url="sound_mute.png" align="center" scale="0.90" crop="0|0|24|24" onclick="switch(crop, 0|0|24|24, 0|24|24|24);togglesound(bgSound)"/>
+	</layer>
+
+
+	<layer name="thumbs_tourvr2" type="container" enabled="true" bgcolor="0x000000" bgalpha="0.6" alpha="1" width="32" height="32" align="rightbottom" keep="true" x="78" y="12" bgcapture="true" zorder="350" bgroundedge="32" visible="false">
+		<!-- <layer name="list_thums" type="image" url="%SWFPATH%/skin/list_thumb.png" align="left"  x="10" onclick="open_info();"/> -->
+
+		<layer name="auto_route" type="image" url="%SWFPATH%/skin/auto_route.png" align="center"  crop="0|24|24|24" onclick="switch(crop, 0|0|24|24, 0|24|24|24);pl_pause_route();" state="on"/>
+	</layer>
+
+	
+
+	<action name="pl_pause_route">
+		if(state==on,set(state,off);autorotate.stop();;set(hint,Mở Tự Động Xoay);,set(state,on);autorotate.start();;set(hint,Tắt Tự Động Xoay));
+	</action>
+	
+
+</krpano>
